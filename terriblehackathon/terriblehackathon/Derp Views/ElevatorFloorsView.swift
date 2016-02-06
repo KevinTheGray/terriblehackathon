@@ -22,6 +22,8 @@ public class ElevatorFloorView : UIView {
   // MARK: - Initializers (including deinit if needed)
   override init(frame: CGRect) {
     super.init(frame: frame)
+    self.createViewHierarchy()
+    self.configureConstraints()
   }
   
   public required init?(coder aDecoder: NSCoder) {
@@ -38,15 +40,40 @@ public class ElevatorFloorView : UIView {
     self.backgroundView.addSubview(thirdFloorIcon)
     self.backgroundView.addSubview(fourthFloorIcon)
     self.backgroundView.addSubview(fifthFloorIcon)
+    
+    self.backgroundView.backgroundColor = UIColor.yellowColor()
   }
   
   public func configureConstraints() {
     
-    
-    
-    
+    constrain([backgroundView, firstFloorIcon, secondFloorIcon, thirdFloorIcon, fourthFloorIcon, fifthFloorIcon]){ (views) -> () in
+      let background = views[0]
+      let first = views[1]
+      let second = views[2]
+      let third = views[3]
+      let fourth = views[4]
+      let fifth = views[5]
+      
+      background.edges == background.superview!.edges
+      align(centerY: first, second, third, fourth, fifth)
+      distribute(by: 10.0, horizontally: first, second, third, fourth, fifth)
+      first.left == background.left + 10.0
+      fifth.right == background.right - 10.0
+      
+      first.width == 60.0
+      first.height == first.width
+      
+      second.size == first.size
+      third.size == first.size
+      fourth.size == first.size
+      fifth.size == first.size
+    }
   }
   // MARK: - Any logic you need
+  public func highlightFloor(floor: Int) {
+  
+  
+  }
   
   // MARK: - Actions
   
@@ -56,28 +83,43 @@ public class ElevatorFloorView : UIView {
     return view
   }()
   
-  lazy var firstFloorIcon: UIView = {
-    var view: UIView = UIView()
+  lazy var firstFloorIcon: UIImageView = {
+    var view: UIImageView = UIImageView()
+    let image: UIImage? = UIImage(named: "floor_1")
+    image?.tint(color: UIColor.redColor())
+    view.image = image
     return view
   }()
   
-  lazy var secondFloorIcon: UIView = {
-    var view: UIView = UIView()
+  lazy var secondFloorIcon: UIImageView = {
+    var view: UIImageView = UIImageView()
+    let image: UIImage? = UIImage(named: "floor_2")
+    image?.tint(color: UIColor.redColor())
+    view.image = image
     return view
   }()
   
-  lazy var thirdFloorIcon: UIView = {
-    var view: UIView = UIView()
+  lazy var thirdFloorIcon: UIImageView = {
+    var view: UIImageView = UIImageView()
+    let image: UIImage? = UIImage(named: "floor_3")
+    image?.tint(color: UIColor.redColor())
+    view.image = image
     return view
   }()
   
-  lazy var fourthFloorIcon: UIView = {
-    var view: UIView = UIView()
+  lazy var fourthFloorIcon: UIImageView = {
+    var view: UIImageView = UIImageView()
+    let image: UIImage? = UIImage(named: "floor_4")
+    image?.tint(color: UIColor.redColor())
+    view.image = image
     return view
   }()
   
-  lazy var fifthFloorIcon: UIView = {
-    var view: UIView = UIView()
+  lazy var fifthFloorIcon: UIImageView = {
+    var view: UIImageView = UIImageView()
+    let image: UIImage? = UIImage(named: "floor_5")
+    image?.tint(color: UIColor.redColor())
+    view.image = image
     return view
   }()
   
