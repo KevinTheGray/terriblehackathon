@@ -20,6 +20,7 @@
 		CA145E241C6502CA00C1B5BD /* PosseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA145E231C6502CA00C1B5BD /* PosseKit.framework */; };
 		CA145E251C6502CA00C1B5BD /* PosseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CA145E231C6502CA00C1B5BD /* PosseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CA145E281C6669DB00C1B5BD /* DerpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA145E271C6669DB00C1B5BD /* DerpViewController.swift */; };
+		CA145E2A1C668B2400C1B5BD /* ButtonEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA145E291C668B2400C1B5BD /* ButtonEntryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +64,7 @@
 		CA145E161C64FF9000C1B5BD /* Haitch.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Haitch.framework.dSYM; path = ../Carthage/Build/iOS/Haitch.framework.dSYM; sourceTree = "<group>"; };
 		CA145E231C6502CA00C1B5BD /* PosseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PosseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA145E271C6669DB00C1B5BD /* DerpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DerpViewController.swift; sourceTree = "<group>"; };
+		CA145E291C668B2400C1B5BD /* ButtonEntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonEntryView.swift; path = "Derp Views/ButtonEntryView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				14CEF7181C6675F1001FA765 /* ElevatorFloorsView.swift */,
+				CA145E291C668B2400C1B5BD /* ButtonEntryView.swift */,
 			);
 			name = "Derp Views";
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				14CEF7191C6675F1001FA765 /* ElevatorFloorsView.swift in Sources */,
 				CA145E281C6669DB00C1B5BD /* DerpViewController.swift in Sources */,
 				CA145E001C64F8A500C1B5BD /* AppDelegate.swift in Sources */,
+				CA145E2A1C668B2400C1B5BD /* ButtonEntryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
