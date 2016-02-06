@@ -29,6 +29,8 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
   private var storyColor: UIColor = UIColor(hex: 0xEB7D42)
   private var buttonEntryViewHeight: CGFloat = 140.0
   
+  private var randomEncounter: RandomEncounter = RandomEncounter.createEncounter(EncounterType.NPCEntersElevator, event: EncounterEvent.AudibleFart, withNPC: EncounterNPC.cat())
+  
   var textEntries: [UILabel] = []
   // MARK: - Initializers
   deinit {
