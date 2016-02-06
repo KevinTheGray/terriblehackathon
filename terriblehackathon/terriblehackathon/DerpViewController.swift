@@ -13,7 +13,7 @@ import PosseKit
 import UIKit
 import PosseKit
 
-public class DerpViewController : UIViewController, UITextViewDelegate {
+public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEntryViewDelegate, ElevatorFloorViewDelegate {
   
   
   private struct textEntryStruct  {
@@ -27,6 +27,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
   private var playerColor: UIColor = UIColor(hex: 0x00A6FF)
   private var notPlayerColor: UIColor = UIColor(hex: 0xDBDBDB)
   private var storyColor: UIColor = UIColor(hex: 0xEB7D42)
+  private var buttonEntryViewHeight: CGFloat = 140.0
   
   var textEntries: [UILabel] = []
   // MARK: - Initializers
@@ -40,14 +41,10 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
     self.navigationController?.navigationBarHidden = false
     self.view.backgroundColor = UIColor.whiteColor()
     self.view.addSubview(self.scrollView)
-    self.view.addSubview(self.textView)
+    self.view.addSubview(self.buttonEntryView)
     self.view.addSubview(self.elevatorFloorView)
     // Bring them to front, or else the tap is NOT registered on the button
-    
-    var x, y, w, h: CGFloat
-    x = 20.0; y = self.view.bounds.maxY - 50.0
-    w = self.view.bounds.width - 40.0; h = 50.0
-    self.textView.frame = CGRectMake(x, y, w, h)
+    self.addText(text: "You are in an elevator, you are on the first floor.", textAddedBy: textEntryStruct.STORY)
   }
   
   public override func viewWillAppear(animated: Bool) {
@@ -70,8 +67,12 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
     let viewHeight: CGFloat = self.view.bounds.height
     var x, y, w, h: CGFloat
     
-    x = 0.0; y = self.elevatorFloorView.frame.maxY + topLayoutLength; w = viewWidth; h = viewHeight - self.elevatorFloorView.bounds.height - topLayoutLength - 50.0 - 10.0
+    x = 0.0; y = self.elevatorFloorView.frame.maxY + topLayoutLength; w = viewWidth;
+    h = viewHeight - self.elevatorFloorView.bounds.height - topLayoutLength - 10.0 - self.buttonEntryViewHeight
     self.scrollView.frame = CGRectMake(x, y, w, h)
+    x = 0.0; y = self.view.bounds.maxY - self.buttonEntryViewHeight
+    w = self.view.bounds.width; h = self.buttonEntryViewHeight
+    self.buttonEntryView.frame = CGRectMake(x, y, w, h)
   }
   
   public override func viewDidLayoutSubviews() {
@@ -84,19 +85,15 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
     return scrollView
   }()
   
-  private lazy var textView: UITextView = {
-    let textView: UITextView = UITextView()
-    textView.bounces = false
-    textView.font = UIFont.systemFontOfSize(15.0)
-    textView.layer.borderColor = UIColor.lightGrayColor().CGColor
-    textView.layer.borderWidth = 2.0
-    textView.layer.cornerRadius = 4.0
-    textView.delegate = self
-    return textView
+  private lazy var buttonEntryView: ButtonEntryView = {
+    let buttonEntryView: ButtonEntryView = ButtonEntryView()
+    buttonEntryView.delegate = self
+    return buttonEntryView
   }()
   
   private lazy var elevatorFloorView: ElevatorFloorView = {
     let floorView: ElevatorFloorView = ElevatorFloorView(frame: CGRectMake(0.0, 0.0, Constants.Screen.Width, 100.0))
+    floorView.delegate = self
     return floorView
   }()
   
@@ -105,14 +102,12 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
     return currentContentHeight
   }
   
-  // MARK: - TextViewDelegates
-  public func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-    if(text == "\n") {
-      self.addText(text: textView.text, textAddedBy: self.textEntries.count % 3)
-      textView.text = ""
-      return false
-    }
-    return true
+  public func didSelectButton(atIndex atIndex: Int) {
+    addText(text: "BALKFJASLKFJALK", textAddedBy: self.textEntries.count % 3)
+  }
+  
+  public func didSelectFloor(floor: Int) {
+    addText(text: "You selected floor \(floor)", textAddedBy: textEntryStruct.USER)
   }
   
   // HELPER
@@ -148,32 +143,5 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
     self.scrollView.addSubview(label)
     self.scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.contentHeight())
     self.scrollView.scrollRectToVisible(label.frame, animated: true)
-  }
-  
-  // MARK: - Actions
-  public func keyboardWillShow(notification: NSNotification) {
-    if let userInfo: NSDictionary = notification.userInfo {
-      let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
-      let keyboardRectangle = keyboardFrame.CGRectValue()
-      let keyboardHeight = keyboardRectangle.height
-      let contentInsets = UIEdgeInsetsMake(0, 0, keyboardHeight, 0)
-      scrollView.contentInset = contentInsets
-      scrollView.scrollIndicatorInsets = contentInsets
-      
-      var x, y, w, h: CGFloat
-      x = 20.0; y = self.view.bounds.maxY - 50.0 - keyboardHeight
-      w = self.view.bounds.width - 40.0; h = 50.0
-      self.textView.frame = CGRectMake(x, y, w, h)
-    }
-  }
-  
-  public func keyboardWillHide(notification: NSNotification) {
-    scrollView.contentInset = UIEdgeInsetsZero
-    scrollView.scrollIndicatorInsets = UIEdgeInsetsZero
-    
-    var x, y, w, h: CGFloat
-    x = 20.0; y = self.view.bounds.maxY - 50.0
-    w = self.view.bounds.width - 40.0; h = 50.0
-    self.textView.frame = CGRectMake(x, y, w, h)
   }
 }
