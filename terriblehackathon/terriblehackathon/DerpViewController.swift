@@ -28,6 +28,9 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
   private var notPlayerColor: UIColor = UIColor(hex: 0xDBDBDB)
   private var storyColor: UIColor = UIColor(hex: 0xEB7D42)
   private var buttonEntryViewHeight: CGFloat = 140.0
+  public var elevatorTimer: NSTimer?
+  public var currentFloor: Int = 1
+  public var destinationFloor: Int = 1
   
   var textEntries: [UILabel] = []
   // MARK: - Initializers
@@ -108,6 +111,12 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
   
   public func didSelectFloor(floor: Int) {
     addText(text: "You selected floor \(floor)", textAddedBy: textEntryStruct.USER)
+    self.destinationFloor = floor
+    if self.destinationFloor == self.currentFloor {
+      self.addText(text: "You reached floor \(self.currentFloor).", textAddedBy: textEntryStruct.STORY)
+    } else {
+      self.elevatorTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "elevatorReachedFloor:", userInfo: nil, repeats: true)
+    }
   }
   
   // HELPER
@@ -143,5 +152,21 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
     self.scrollView.addSubview(label)
     self.scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.contentHeight())
     self.scrollView.scrollRectToVisible(label.frame, animated: true)
+  }
+  
+  public func elevatorReachedFloor(sender: AnyObject?) {
+    if self.currentFloor > self.destinationFloor {
+      self.currentFloor--
+    } else if self.currentFloor < self.destinationFloor {
+      self.currentFloor++
+    }
+    self.elevatorFloorView.setButtonSelected(atIndex: self.currentFloor - 1)
+    if self.currentFloor == self.destinationFloor {
+      self.addText(text: "You reached floor \(self.currentFloor).", textAddedBy: textEntryStruct.STORY)
+      self.elevatorTimer?.invalidate()
+      self.elevatorTimer = nil
+    } else {
+      self.addText(text: "You passed floor \(self.currentFloor).", textAddedBy: textEntryStruct.STORY)
+    }
   }
 }

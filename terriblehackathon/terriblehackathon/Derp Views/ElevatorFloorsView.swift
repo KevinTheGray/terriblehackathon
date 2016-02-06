@@ -166,10 +166,16 @@ public class ElevatorFloorView : UIView {
     return view
   }()
   
+  public func setButtonSelected(atIndex index: Int) {
+    for (currIndex, button) in self.buttons.enumerate() {
+      button.selected = (index == currIndex)
+    }
+  }
+  
   public func pressedButton(sender: AnyObject?) {
     if let passedInButton: Button = sender as? Button {
-      for button in buttons {
-        button.selected = (button == passedInButton)
+      for _ in buttons {
+        //button.selected = (button == passedInButton)
       }
       self.delegate?.didSelectFloor(passedInButton.tag + 1)
     }
