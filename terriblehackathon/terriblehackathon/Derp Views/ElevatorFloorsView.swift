@@ -23,6 +23,8 @@ public class ElevatorFloorView : UIView {
   // MARK: - Initializers (including deinit if needed)
   override init(frame: CGRect) {
     super.init(frame: frame)
+    self.currentFloor = 1
+    
     self.createViewHierarchy()
     self.configureConstraints()
   }
@@ -42,6 +44,7 @@ public class ElevatorFloorView : UIView {
     self.backgroundView.addSubview(fourthFloorIcon)
     self.backgroundView.addSubview(fifthFloorIcon)
     
+    self.backgroundView.addSubview(highlightedView)
     self.backgroundView.backgroundColor = UIColor.yellowColor()
   }
   
@@ -76,8 +79,18 @@ public class ElevatorFloorView : UIView {
   }
   // MARK: - Any logic you need
   public func highlightFloor(floor: Int) {
-  
-  
+    
+    
+    NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+      switch floor {
+      case 1: self.firstFloorIcon.image?.tint(color: UIColor.redColor())
+      case 2: self.secondFloorIcon.image?.tint(color: UIColor.redColor())
+      case 3: self.thirdFloorIcon.image?.tint(color: UIColor.redColor())
+      case 4: self.fourthFloorIcon.image?.tint(color: UIColor.redColor())
+      case 5: self.fifthFloorIcon.image?.tint(color: UIColor.redColor())
+      default: print("does nothing")
+      }
+    }
   }
   
   // MARK: - Actions
@@ -130,6 +143,12 @@ public class ElevatorFloorView : UIView {
     let image: UIImage? = UIImage(named: "floor_5")
     image?.tint(color: UIColor.redColor())
     view.image = image
+    return view
+  }()
+  
+  lazy var highlightedView: UIView = {
+    let view: UIView = UIView(frame: CGRectMake(0.0, 0.0, 40.0, 40.0))
+    view.backgroundColor = UIColor.redColor()
     return view
   }()
   
