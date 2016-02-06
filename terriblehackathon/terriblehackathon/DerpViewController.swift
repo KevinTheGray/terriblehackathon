@@ -15,6 +15,10 @@ import PosseKit
 
 public class DerpViewController : UIViewController, UITextViewDelegate {
   
+  
+  private var textEntryMaxWidth: CGFloat = 200.0
+  private var currentContentHeight: CGFloat = 10.0
+  
   var textEntries: [UILabel] = []
   // MARK: - Initializers
   deinit {
@@ -56,7 +60,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
     let viewHeight: CGFloat = self.view.bounds.height
     var x, y, w, h: CGFloat
     
-    x = 0.0; y = topLayoutLength; w = viewWidth; h = viewHeight - topLayoutLength - 50.0
+    x = 0.0; y = topLayoutLength; w = viewWidth; h = viewHeight - topLayoutLength - 50.0 - 10.0
     self.scrollView.frame = CGRectMake(x, y, w, h)
   }
   
@@ -83,22 +87,45 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
   
   // MARK: - Helper functions
   public func contentHeight() -> CGFloat {
-    return 1000.0
+    return currentContentHeight
   }
   
   // MARK: - TextViewDelegates
   public func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
     if(text == "\n") {
+      self.addText(text: textView.text, userEntered: true)
       textView.text = ""
-      self.addText(text: "")
       return false
     }
     return true
   }
   
   // HELPER
-  public func addText(text text: String) {
-    self.view.addSubview(UILabel())
+  public func addText(text text: String, userEntered: Bool) {
+    let label: UILabel = UILabel()
+    label.layer.cornerRadius = 4.0
+    label.layer.masksToBounds = true
+    let userEnteredWhatever: Bool = self.textEntries.count % 2 == 0
+    label.numberOfLines = 0
+    self.textEntries.append(label)
+    let labelSize: CGSize = label.font.sizeOfString(text, constrainedToWidth: Double(self.textEntryMaxWidth), lineCount: 0)
+    
+    if userEnteredWhatever == true {
+      label.frame = CGRectMake(20.0, self.currentContentHeight, labelSize.width + 10.0, labelSize.height + 20.0)
+      currentContentHeight += labelSize.height + 20.0 + 10.0
+      label.backgroundColor = UIColor.lightGrayColor()
+      label.text = text
+    } else {
+      label.textAlignment = .Right
+      label.frame = CGRectMake(self.view.bounds.width - 20.0 - labelSize.width - 10.0, self.currentContentHeight, labelSize.width + 10.0, labelSize.height + 20.0)
+      currentContentHeight += labelSize.height + 20.0 + 10.0
+      label.backgroundColor = UIColor.blueColor()
+      label.text = text
+    }
+    
+    self.scrollView.addSubview(label)
+    self.scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.contentHeight())
+    self.scrollView.scrollRectToVisible(label.frame, animated: true)
   }
   
   // MARK: - Actions
