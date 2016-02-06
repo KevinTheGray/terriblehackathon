@@ -23,6 +23,7 @@ public class ElevatorDoors: UIView {
   }
   
   private func constructViewHierarchy() {
+    self.backgroundColor = UIColor.clearColor()
     self.addSubview(self.backgroundView)
     self.backgroundView.addSubview(self.leftDoorView)
     self.backgroundView.addSubview(self.rightDoorView)
@@ -36,6 +37,8 @@ public class ElevatorDoors: UIView {
       
       background.edges == background.superview!.edges
       leftDoor.width == Constants.Screen.Width / 2.0
+      leftDoor.height == background.height
+      rightDoor.height == leftDoor.height
       rightDoor.width == leftDoor.width
       
       leftDoor.top == background.top
@@ -50,13 +53,19 @@ public class ElevatorDoors: UIView {
     }
   }
   
-  public func openDoors() {
+  public func openDoors(completionBlock: (Bool) -> Void) {
     let currentLeftDoorFrame: CGRect = self.leftDoorView.frame
     let currentRightDoorFrame: CGRect = self.rightDoorView.frame
-    UIView.animateWithDuration(0.75) { () -> Void in
+//    UIView.animateWithDuration(0.75) { () -> Void in
+//      self.leftDoorView.frame = CGRectMake(-currentLeftDoorFrame.size.width, 0.0, currentLeftDoorFrame.size.width, currentLeftDoorFrame.size.height)
+//      self.rightDoorView.frame = CGRectMake(currentRightDoorFrame.size.width * 2, 0.0, currentRightDoorFrame.size.width, currentRightDoorFrame.size.height)
+//    }
+    
+    UIView.animateWithDuration(0.75, animations: { () -> Void in
       self.leftDoorView.frame = CGRectMake(-currentLeftDoorFrame.size.width, 0.0, currentLeftDoorFrame.size.width, currentLeftDoorFrame.size.height)
       self.rightDoorView.frame = CGRectMake(currentRightDoorFrame.size.width * 2, 0.0, currentRightDoorFrame.size.width, currentRightDoorFrame.size.height)
-    }
+
+      }, completion: completionBlock)
   }
   
   public func closeDoors() {

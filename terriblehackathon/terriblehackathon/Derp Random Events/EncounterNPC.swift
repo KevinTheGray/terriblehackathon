@@ -9,7 +9,7 @@
 import Foundation
 
 public class EncounterNPC {
-  private var npcName: String = ""
+  public var npcName: String = ""
   public class func cat() -> EncounterNPC {
     let encounterNPC: EncounterNPC = EncounterNPC()
     encounterNPC.npcName = "Tabby Cat"

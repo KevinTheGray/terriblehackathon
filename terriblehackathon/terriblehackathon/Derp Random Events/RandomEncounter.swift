@@ -32,13 +32,13 @@ public enum EncounterStage {
 public class RandomEncounter {
   
   // MARK: - Variables
-  private var encounterType: EncounterType = .NPCEntersElevator
-  private var encounterEvent: EncounterEvent = .PushesFloorButton
-  private var encounterNPC: EncounterNPC = EncounterNPC.cat()
-  private var encounterStage: EncounterStage = .InitialInteraction
-  private var delegate: RandomEncounterDelegate?
+  public var encounterType: EncounterType = .NPCEntersElevator
+  public var encounterEvent: EncounterEvent = .PushesFloorButton
+  public var encounterNPC: EncounterNPC = EncounterNPC.cat()
+  public var encounterStage: EncounterStage = .InitialInteraction
+  public var delegate: RandomEncounterDelegate?
   
-  private var fartDialogOptions: [String] = ["Stare intensely", " ", " ", " "]
+  public var fartDialogOptions: [String] = ["Stare intensely", " ", " ", " "]
   
   
   // MARK: - Initialization
@@ -69,7 +69,7 @@ public class RandomEncounter {
     return dialogOptions
   }
   
-  private func dialogOptionsForFartEvent() -> EncounterDialogChoices {
+  public func dialogOptionsForFartEvent() -> EncounterDialogChoices {
     switch self.encounterStage {
     case .InitialInteraction: return EncounterDialogChoices(awkwardChoice: "Hey, that's a nice fragrance", angryChoice: "I wish I did that first",
       neutralChoice: "I dont feel very strongly about this", otherChoice: "*Stare Silently as the smell wafts")

@@ -59,13 +59,21 @@ public class ButtonEntryView : UIView {
       button.addTarget(self, action: "pressedButton:", forControlEvents: .TouchUpInside)
       button.cornerRadius = 4.0
       button.tag = index
-      button.titleLabel.font = UIFont.systemFontOfSize(20.0)
+      button.titleLabel.font = UIFont.systemFontOfSize(14.0)
       button.setTitle(title: "Cool", forState: .Normal)
+      button.titleLabel.numberOfLines = 0
       self.buttons.append(button)
     }
   }
   
   public func configureConstraints() {
+  }
+  
+  public func setButtonTitles(encounterDialogChoices choices: EncounterDialogChoices) {
+    self.buttons[0].setTitle(title: choices.awkward, forState: .Normal)
+    self.buttons[1].setTitle(title: choices.angry, forState: .Normal)
+    self.buttons[2].setTitle(title: choices.neutral, forState: .Normal)
+    self.buttons[3].setTitle(title: choices.other, forState: .Normal)
   }
   
   // MARK: - Actions

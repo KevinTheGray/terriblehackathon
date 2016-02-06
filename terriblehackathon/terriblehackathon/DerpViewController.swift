@@ -48,7 +48,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
     self.view.addSubview(self.scrollView)
     self.view.addSubview(self.buttonEntryView)
     self.view.addSubview(self.elevatorFloorView)
-    // Bring them to front, or else the tap is NOT registered on the button
+    //self.view.addSubview(self.elevatorDoorsView)
     self.addText(text: "You are in an elevator, you are on the first floor.", textAddedBy: textEntryStruct.STORY)
   }
   
@@ -102,13 +102,39 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
     return floorView
   }()
   
+  private lazy var elevatorDoorsView: ElevatorDoors = {
+    let doorView: ElevatorDoors = ElevatorDoors(frame: CGRectMake(0.0, Constants.Screen.Height - 135.0, Constants.Screen.Width, 135.0))
+    return doorView
+  }()
+  
   // MARK: - Helper functions
   public func contentHeight() -> CGFloat {
     return currentContentHeight
   }
   
-  public func didSelectButton(atIndex atIndex: Int) {
-    addText(text: "BALKFJASLKFJALK", textAddedBy: self.textEntries.count % 3)
+  public func didSelectButton(atIndex index: Int) {
+    var choice: DialogChoiceType?
+    if index == 0 {
+      choice = DialogChoiceType.Awkward
+    } else if index == 1 {
+      choice = DialogChoiceType.Angry
+    } else if index == 2 {
+      choice = DialogChoiceType.Neutral
+    } else {
+      choice = DialogChoiceType.Other
+    }
+    let optionChoices: EncounterDialogChoices = self.randomEncounter.dialogOptionsForFartEvent()
+    optionChoices.selectChoiceType(choice!)
+    let string = optionChoices.textForSelectedChoice()
+    self.addText(text: string, textAddedBy: textEntryStruct.USER)
+    
+    let response: String = self.randomEncounter.encounterNPC.npcDialogResponseForType(choice!)
+    self.addText(text: response, textAddedBy: textEntryStruct.NOT_USER)
+    
+    let options: EncounterDialogChoices = self.randomEncounter.dialogOptionsForFartEvent()
+    self.buttonEntryView.setButtonTitles(encounterDialogChoices: options)
+//    self.view.bringSubviewToFront(self.elevatorDoorsView)
+//    self.elevatorDoorsView.closeDoors()
   }
   
   public func didSelectFloor(floor: Int) {
@@ -164,9 +190,15 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
     }
     self.elevatorFloorView.setButtonSelected(atIndex: self.currentFloor - 1)
     if self.currentFloor == self.destinationFloor {
+      
       self.addText(text: "You reached floor \(self.currentFloor).", textAddedBy: textEntryStruct.STORY)
       self.elevatorTimer?.invalidate()
       self.elevatorTimer = nil
+      
+      let options: EncounterDialogChoices = self.randomEncounter.dialogOptionsForFartEvent()
+      let name: String = self.randomEncounter.encounterNPC.npcName
+      self.addText(text: "\(name) entered the elevator.", textAddedBy: textEntryStruct.STORY)
+      self.buttonEntryView.setButtonTitles(encounterDialogChoices: options)
     } else {
       self.addText(text: "You passed floor \(self.currentFloor).", textAddedBy: textEntryStruct.STORY)
     }
