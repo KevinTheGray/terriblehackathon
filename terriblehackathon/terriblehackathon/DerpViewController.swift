@@ -32,6 +32,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
     self.view.backgroundColor = UIColor.whiteColor()
     self.view.addSubview(self.scrollView)
     self.view.addSubview(self.textView)
+    self.view.addSubview(self.elevatorFloorView)
     // Bring them to front, or else the tap is NOT registered on the button
     
     var x, y, w, h: CGFloat
@@ -83,6 +84,11 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
     textView.layer.cornerRadius = 4.0
     textView.delegate = self
     return textView
+  }()
+  
+  private lazy var elevatorFloorView: ElevatorFloorView = {
+    let floorView: ElevatorFloorView = ElevatorFloorView(frame: CGRectMake(0.0, 0.0, 300.0, 100.0))
+    return floorView
   }()
   
   // MARK: - Helper functions
