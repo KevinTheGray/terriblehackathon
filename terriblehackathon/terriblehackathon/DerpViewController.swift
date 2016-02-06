@@ -13,7 +13,7 @@ import PosseKit
 import UIKit
 import PosseKit
 
-public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEntryViewDelegate {
+public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEntryViewDelegate, ElevatorFloorViewDelegate {
   
   
   private struct textEntryStruct  {
@@ -44,7 +44,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
     self.view.addSubview(self.buttonEntryView)
     self.view.addSubview(self.elevatorFloorView)
     // Bring them to front, or else the tap is NOT registered on the button
-    
+    self.addText(text: "You are in an elevator, you are on the first floor.", textAddedBy: textEntryStruct.STORY)
   }
   
   public override func viewWillAppear(animated: Bool) {
@@ -93,6 +93,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
   
   private lazy var elevatorFloorView: ElevatorFloorView = {
     let floorView: ElevatorFloorView = ElevatorFloorView(frame: CGRectMake(0.0, 0.0, 300.0, 100.0))
+    floorView.delegate = self
     return floorView
   }()
   
@@ -103,6 +104,10 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
   
   public func didSelectButton(atIndex atIndex: Int) {
     addText(text: "BALKFJASLKFJALK", textAddedBy: self.textEntries.count % 3)
+  }
+  
+  public func didSelectFloor(floor: Int) {
+    addText(text: "You selected floor \(floor)", textAddedBy: textEntryStruct.USER)
   }
   
   // HELPER

@@ -71,7 +71,6 @@ public class ButtonEntryView : UIView {
   // MARK: - Actions
   public func pressedButton(sender: AnyObject?) {
     if let button: Button = sender as? Button {
-      print(button.tag)
       self.delegate?.didSelectButton(atIndex: button.tag)
     }
   }
