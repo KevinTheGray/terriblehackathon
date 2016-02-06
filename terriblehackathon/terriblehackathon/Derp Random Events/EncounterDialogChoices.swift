@@ -34,4 +34,17 @@ public class EncounterDialogChoices {
     self.selectedChoiceType = type
   }
   
+  public func textForSelectedChoice() -> String {
+    guard let choiceType: DialogChoiceType = self.selectedChoiceType else {
+      return "NOOOOOO"
+    }
+    
+    switch choiceType {
+    case .Awkward: return self.awkward
+    case .Angry: return self.angry
+    case .Neutral: return self.neutral
+    case .Other: return self.other
+    }
+  }
+  
 }

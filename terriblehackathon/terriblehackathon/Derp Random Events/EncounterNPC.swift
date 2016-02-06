@@ -24,4 +24,8 @@ public class EncounterNPC {
     case .Other: return "*Stares off and meows slowly*"
     }
   }
+  
+  public func npcGivesYouTuna() -> String {
+    return "gives you a can of tuna"
+  }
 }

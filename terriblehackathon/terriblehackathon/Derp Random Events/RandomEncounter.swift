@@ -54,20 +54,34 @@ public class RandomEncounter {
     return randomEncounter
   }
   
+  
   // MARK: - Dialog
   public func dialogOptionsForEvent(type: EncounterEvent) -> EncounterDialogChoices {
     var dialogOptions: EncounterDialogChoices = EncounterDialogChoices(awkwardChoice: "", angryChoice: "", neutralChoice: "", otherChoice: "")
     
     switch type{
-    case .PushesFloorButton: dialogOptions = EncounterDialogChoices(awkwardChoice: "Awkward", angryChoice: "Angry", neutralChoice: "Neutral", otherChoice: "Other")
-    case .MakeSmallTalk: dialogOptions =  EncounterDialogChoices(awkwardChoice: "Awkward", angryChoice: "Angry", neutralChoice: "Neutral", otherChoice: "Other")
-
-    case .AudibleFart: dialogOptions =  EncounterDialogChoices(awkwardChoice: "Awkward", angryChoice: "Angry", neutralChoice: "Neutral", otherChoice: "Other")
+    case .PushesFloorButton: dialogOptions = self.dialogOptionsForFartEvent()
+    case .MakeSmallTalk: dialogOptions =  self.dialogOptionsForFartEvent()
+    case .AudibleFart: dialogOptions =  self.dialogOptionsForFartEvent()
     }
     
+    self.updateEncounterStage()
     return dialogOptions
   }
   
+  private func dialogOptionsForFartEvent() -> EncounterDialogChoices {
+    switch self.encounterStage {
+    case .InitialInteraction: return EncounterDialogChoices(awkwardChoice: "Hey, that's a nice fragrance", angryChoice: "I wish I did that first",
+      neutralChoice: "I dont feel very strongly about this", otherChoice: "*Stare Silently as the smell wafts")
+    case .ResponseInteraction: return EncounterDialogChoices(awkwardChoice: "Maybe you didn't hear me. I said it was a nice fragrance", angryChoice: "You couldn't have held it in?",
+      neutralChoice: "*Stare*", otherChoice: "*Excuse me, I need to make a call*")
+    case .ResolutionInteration: return EncounterDialogChoices(awkwardChoice: "Hope to see you soon", angryChoice: "Jerk",
+      neutralChoice: "Hmm... look at the time", otherChoice: "*Sit down*")
+    }
+  }
+  
+  
+  // MARK: - Progress through events
   public func updateEncounterStage() {
     switch self.encounterStage {
     case .InitialInteraction: self.encounterStage = .ResponseInteraction
@@ -75,23 +89,5 @@ public class RandomEncounter {
     default: self.encounterStage = .InitialInteraction
     }
   }
-  
-  public func handleResponseForType(type: DialogChoiceType) -> EncounterDialogChoices {
-    switch type {
-    case .Awkward: return self.dialogOptionsForAwkwardResponse()
-    case .Angry: return self.dialogOptionsForAwkwardResponse()
-    case .Neutral: return self.dialogOptionsForAwkwardResponse()
-    case .Other: return self.dialogOptionsForAwkwardResponse()
-    }
-  }
-  
-  private func dialogOptionsForAwkwardResponse() -> EncounterDialogChoices {
-    switch self.encounterStage {
-    case .InitialInteraction: return EncounterDialogChoices(awkwardChoice: "Hey, that's a nice fragrance", angryChoice: "I wish I did that first", neutralChoice: "I dont feel very strongly about this", otherChoice: "*Stare Silently as the smell wafts")
-    case .ResponseInteraction: return EncounterDialogChoices(awkwardChoice: "Hey, that's a nice fragrance", angryChoice: "I wish I did that first", neutralChoice: "I dont feel very strongly about this", otherChoice: "*Stare Silently as the smell wafts")
-    case .ResolutionInteration: return EncounterDialogChoices(awkwardChoice: "Hey, that's a nice fragrance", angryChoice: "I wish I did that first", neutralChoice: "I dont feel very strongly about this", otherChoice: "*Stare Silently as the smell wafts")
-    }
-  }
-  
   
 }
