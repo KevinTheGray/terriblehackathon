@@ -18,6 +18,8 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
   
   private var textEntryMaxWidth: CGFloat = 200.0
   private var currentContentHeight: CGFloat = 10.0
+  private var playerColor: UIColor = UIColor(hex: 0x00A6FF)
+  private var notPlayerColor: UIColor = UIColor(hex: 0xDBDBDB)
   
   var textEntries: [UILabel] = []
   // MARK: - Initializers
@@ -61,7 +63,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
     let viewHeight: CGFloat = self.view.bounds.height
     var x, y, w, h: CGFloat
     
-    x = 0.0; y = topLayoutLength; w = viewWidth; h = viewHeight - topLayoutLength - 50.0 - 10.0
+    x = 0.0; y = self.elevatorFloorView.frame.maxY + topLayoutLength; w = viewWidth; h = viewHeight - self.elevatorFloorView.bounds.height - topLayoutLength - 50.0 - 10.0
     self.scrollView.frame = CGRectMake(x, y, w, h)
   }
   
@@ -109,6 +111,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
   // HELPER
   public func addText(text text: String, userEntered: Bool) {
     let label: UILabel = UILabel()
+    label.font = UIFont.systemFontOfSize(18.0)
     label.layer.cornerRadius = 4.0
     label.layer.masksToBounds = true
     let userEnteredWhatever: Bool = self.textEntries.count % 2 == 0
@@ -119,13 +122,13 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
     if userEnteredWhatever == true {
       label.frame = CGRectMake(20.0, self.currentContentHeight, labelSize.width + 10.0, labelSize.height + 20.0)
       currentContentHeight += labelSize.height + 20.0 + 10.0
-      label.backgroundColor = UIColor.lightGrayColor()
+      label.backgroundColor = self.playerColor
       label.text = text
     } else {
       label.textAlignment = .Right
       label.frame = CGRectMake(self.view.bounds.width - 20.0 - labelSize.width - 10.0, self.currentContentHeight, labelSize.width + 10.0, labelSize.height + 20.0)
       currentContentHeight += labelSize.height + 20.0 + 10.0
-      label.backgroundColor = UIColor.blueColor()
+      label.backgroundColor = self.notPlayerColor
       label.text = text
     }
     
