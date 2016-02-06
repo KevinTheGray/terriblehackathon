@@ -13,6 +13,7 @@ public struct Constants {
   
   public struct Screen {
     static let Width: CGFloat = UIScreen.mainScreen().bounds.size.width
+    static let Height: CGFloat = UIScreen.mainScreen().bounds.size.height
     
   }
   

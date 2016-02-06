@@ -45,6 +45,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
     self.view.addSubview(self.scrollView)
     self.view.addSubview(self.buttonEntryView)
     self.view.addSubview(self.elevatorFloorView)
+    self.view.addSubview(self.elevatorDoorsView)
     // Bring them to front, or else the tap is NOT registered on the button
     self.addText(text: "You are in an elevator, you are on the first floor.", textAddedBy: textEntryStruct.STORY)
   }
@@ -99,6 +100,11 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
     return floorView
   }()
   
+  private lazy var elevatorDoorsView: ElevatorDoors = {
+    let doorView: ElevatorDoors = ElevatorDoors(frame: CGRectMake(0.0, Constants.Screen.Height - 135.0, Constants.Screen.Width, 135.0))
+    return doorView
+  }()
+  
   // MARK: - Helper functions
   public func contentHeight() -> CGFloat {
     return currentContentHeight
@@ -106,10 +112,16 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
   
   public func didSelectButton(atIndex atIndex: Int) {
     addText(text: "BALKFJASLKFJALK", textAddedBy: self.textEntries.count % 3)
+//    self.view.bringSubviewToFront(self.elevatorDoorsView)
+//    self.elevatorDoorsView.closeDoors()
   }
   
   public func didSelectFloor(floor: Int) {
     addText(text: "You selected floor \(floor)", textAddedBy: textEntryStruct.USER)
+//    self.elevatorDoorsView.openDoors { (complete) -> Void in
+//      self.view.sendSubviewToBack(self.elevatorDoorsView)
+//    }
+    
   }
   
   // HELPER
