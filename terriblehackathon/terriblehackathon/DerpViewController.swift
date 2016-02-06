@@ -16,10 +16,17 @@ import PosseKit
 public class DerpViewController : UIViewController, UITextViewDelegate {
   
   
+  private struct textEntryStruct  {
+    static let USER: Int = 0
+    static let NOT_USER: Int = 1
+    static let STORY: Int = 2
+  }
+  
   private var textEntryMaxWidth: CGFloat = 200.0
   private var currentContentHeight: CGFloat = 10.0
   private var playerColor: UIColor = UIColor(hex: 0x00A6FF)
   private var notPlayerColor: UIColor = UIColor(hex: 0xDBDBDB)
+  private var storyColor: UIColor = UIColor(hex: 0xEB7D42)
   
   var textEntries: [UILabel] = []
   // MARK: - Initializers
@@ -101,7 +108,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
   // MARK: - TextViewDelegates
   public func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
     if(text == "\n") {
-      self.addText(text: textView.text, userEntered: true)
+      self.addText(text: textView.text, textAddedBy: self.textEntries.count % 3)
       textView.text = ""
       return false
     }
@@ -109,26 +116,32 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
   }
   
   // HELPER
-  public func addText(text text: String, userEntered: Bool) {
+  public func addText(text text: String, textAddedBy: Int) {
     let label: UILabel = UILabel()
     label.font = UIFont.systemFontOfSize(18.0)
     label.layer.cornerRadius = 4.0
     label.layer.masksToBounds = true
-    let userEnteredWhatever: Bool = self.textEntries.count % 2 == 0
     label.numberOfLines = 0
     self.textEntries.append(label)
     let labelSize: CGSize = label.font.sizeOfString(text, constrainedToWidth: Double(self.textEntryMaxWidth), lineCount: 0)
     
-    if userEnteredWhatever == true {
+    if textAddedBy == textEntryStruct.USER {
       label.frame = CGRectMake(20.0, self.currentContentHeight, labelSize.width + 10.0, labelSize.height + 20.0)
       currentContentHeight += labelSize.height + 20.0 + 10.0
       label.backgroundColor = self.playerColor
       label.text = text
-    } else {
+    } else if textAddedBy == textEntryStruct.NOT_USER  {
       label.textAlignment = .Right
       label.frame = CGRectMake(self.view.bounds.width - 20.0 - labelSize.width - 10.0, self.currentContentHeight, labelSize.width + 10.0, labelSize.height + 20.0)
       currentContentHeight += labelSize.height + 20.0 + 10.0
       label.backgroundColor = self.notPlayerColor
+      label.text = text
+    }
+    else if textAddedBy == textEntryStruct.STORY  {
+      label.textAlignment = .Center
+      label.frame = CGRectMake(self.view.bounds.midX - labelSize.width/2.0 - 5.0, self.currentContentHeight, labelSize.width + 10.0, labelSize.height + 20.0)
+      currentContentHeight += labelSize.height + 20.0 + 10.0
+      label.backgroundColor = self.storyColor
       label.text = text
     }
     
