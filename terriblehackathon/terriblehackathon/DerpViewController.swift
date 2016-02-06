@@ -96,7 +96,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate {
   }()
   
   private lazy var elevatorFloorView: ElevatorFloorView = {
-    let floorView: ElevatorFloorView = ElevatorFloorView(frame: CGRectMake(0.0, 0.0, 300.0, 100.0))
+    let floorView: ElevatorFloorView = ElevatorFloorView(frame: CGRectMake(0.0, 0.0, Constants.Screen.Width, 100.0))
     return floorView
   }()
   
