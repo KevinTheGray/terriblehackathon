@@ -50,8 +50,7 @@ public class ElevatorFloorView : UIView {
     self.buttons.append(fourthFloorButton)
     self.backgroundView.addSubview(fifthFloorButton)
     self.buttons.append(fifthFloorButton)
-    
-    self.backgroundView.addSubview(highlightedView)
+
     self.backgroundView.backgroundColor = UIColor.lightGrayColor()
   }
   

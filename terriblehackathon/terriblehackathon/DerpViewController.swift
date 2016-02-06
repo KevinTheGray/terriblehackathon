@@ -32,6 +32,8 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
   public var currentFloor: Int = 1
   public var destinationFloor: Int = 1
   
+  private var randomEncounter: RandomEncounter = RandomEncounter.createEncounter(EncounterType.NPCEntersElevator, event: EncounterEvent.AudibleFart, withNPC: EncounterNPC.cat())
+  
   var textEntries: [UILabel] = []
   // MARK: - Initializers
   deinit {

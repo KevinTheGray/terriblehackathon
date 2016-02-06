@@ -14,6 +14,7 @@
 		148630C31C668C1200C8531E /* ElevatorMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148630C21C668C1200C8531E /* ElevatorMusicPlayer.swift */; };
 		14B6EB0A1C66A84200D93FD1 /* EncounterNPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6EB091C66A84200D93FD1 /* EncounterNPC.swift */; };
 		14B6EB0C1C66A8A900D93FD1 /* EncounterDialogChoices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6EB0B1C66A8A900D93FD1 /* EncounterDialogChoices.swift */; };
+		14B6EB0E1C66AFCB00D93FD1 /* ElevatorDoors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6EB0D1C66AFCB00D93FD1 /* ElevatorDoors.swift */; };
 		14CEF7191C6675F1001FA765 /* ElevatorFloorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEF7181C6675F1001FA765 /* ElevatorFloorsView.swift */; };
 		CA145E001C64F8A500C1B5BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA145DFF1C64F8A500C1B5BD /* AppDelegate.swift */; };
 		CA145E021C64F8A500C1B5BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA145E011C64F8A500C1B5BD /* ViewController.swift */; };
@@ -61,6 +62,7 @@
 		148630C21C668C1200C8531E /* ElevatorMusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElevatorMusicPlayer.swift; sourceTree = "<group>"; };
 		14B6EB091C66A84200D93FD1 /* EncounterNPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EncounterNPC.swift; path = "Derp Random Events/EncounterNPC.swift"; sourceTree = "<group>"; };
 		14B6EB0B1C66A8A900D93FD1 /* EncounterDialogChoices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EncounterDialogChoices.swift; path = "Derp Random Events/EncounterDialogChoices.swift"; sourceTree = "<group>"; };
+		14B6EB0D1C66AFCB00D93FD1 /* ElevatorDoors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ElevatorDoors.swift; path = "Derp Views/ElevatorDoors.swift"; sourceTree = "<group>"; };
 		14CEF7181C6675F1001FA765 /* ElevatorFloorsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ElevatorFloorsView.swift; path = "Derp Views/ElevatorFloorsView.swift"; sourceTree = "<group>"; };
 		CA145DFC1C64F8A500C1B5BD /* terriblehackathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = terriblehackathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA145DFF1C64F8A500C1B5BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				14CEF7181C6675F1001FA765 /* ElevatorFloorsView.swift */,
 				CA145E291C668B2400C1B5BD /* ButtonEntryView.swift */,
+				14B6EB0D1C66AFCB00D93FD1 /* ElevatorDoors.swift */,
 			);
 			name = "Derp Views";
 			sourceTree = "<group>";
@@ -134,7 +137,6 @@
 				148630C21C668C1200C8531E /* ElevatorMusicPlayer.swift */,
 				148630BD1C6679EE00C8531E /* Derp Views */,
 				CA145E111C64FA1900C1B5BD /* SupportingFiles */,
-				CA145DFF1C64F8A500C1B5BD /* AppDelegate.swift */,
 				CA145E271C6669DB00C1B5BD /* DerpViewController.swift */,
 				CA145E011C64F8A500C1B5BD /* ViewController.swift */,
 				148630BE1C66803300C8531E /* Constants.swift */,
@@ -145,6 +147,7 @@
 		CA145E111C64FA1900C1B5BD /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				CA145DFF1C64F8A500C1B5BD /* AppDelegate.swift */,
 				CA145E061C64F8A500C1B5BD /* Assets.xcassets */,
 				CA145E081C64F8A500C1B5BD /* LaunchScreen.storyboard */,
 				CA145E0B1C64F8A500C1B5BD /* Info.plist */,
@@ -264,6 +267,7 @@
 			files = (
 				148630BF1C66803300C8531E /* Constants.swift in Sources */,
 				14B6EB0A1C66A84200D93FD1 /* EncounterNPC.swift in Sources */,
+				14B6EB0E1C66AFCB00D93FD1 /* ElevatorDoors.swift in Sources */,
 				14B6EB0C1C66A8A900D93FD1 /* EncounterDialogChoices.swift in Sources */,
 				CA145E021C64F8A500C1B5BD /* ViewController.swift in Sources */,
 				14CEF7191C6675F1001FA765 /* ElevatorFloorsView.swift in Sources */,
