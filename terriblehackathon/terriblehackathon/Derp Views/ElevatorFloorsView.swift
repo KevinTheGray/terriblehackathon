@@ -18,6 +18,7 @@ public class ElevatorFloorView : UIView {
   // MARK: - Variables
   var delegate: ElevatorFloorViewDelegate?
   private var currentFloor: Int = 0
+  static let iconRect: CGRect = CGRectMake(0.0, 0.0, 60.0, 60.0)
   
   // MARK: - Initializers (including deinit if needed)
   override init(frame: CGRect) {
@@ -55,18 +56,22 @@ public class ElevatorFloorView : UIView {
       let fifth = views[5]
       
       background.edges == background.superview!.edges
-      align(centerY: first, second, third, fourth, fifth)
-      distribute(by: 10.0, horizontally: first, second, third, fourth, fifth)
-      first.left == background.left + 10.0
-      fifth.right == background.right - 10.0
+      align(centerY: first, second, third, fourth, fifth, background)
       
-      first.width == 60.0
+      first.width == 50.0
       first.height == first.width
       
       second.size == first.size
       third.size == first.size
       fourth.size == first.size
       fifth.size == first.size
+      
+      third.centerX == background.centerX
+      second.right == third.left - 10.0
+      first.right == second.left - 10.0
+      
+      fourth.left == third.right + 10.0
+      fifth.left == fourth.right + 10.0
     }
   }
   // MARK: - Any logic you need
@@ -84,7 +89,8 @@ public class ElevatorFloorView : UIView {
   }()
   
   lazy var firstFloorIcon: UIImageView = {
-    var view: UIImageView = UIImageView()
+    var view: UIImageView = UIImageView(frame: iconRect)
+    view.contentMode = UIViewContentMode.ScaleAspectFit
     let image: UIImage? = UIImage(named: "floor_1")
     image?.tint(color: UIColor.redColor())
     view.image = image
@@ -92,7 +98,8 @@ public class ElevatorFloorView : UIView {
   }()
   
   lazy var secondFloorIcon: UIImageView = {
-    var view: UIImageView = UIImageView()
+    var view: UIImageView = UIImageView(frame: iconRect)
+    view.contentMode = UIViewContentMode.ScaleAspectFit
     let image: UIImage? = UIImage(named: "floor_2")
     image?.tint(color: UIColor.redColor())
     view.image = image
@@ -100,7 +107,8 @@ public class ElevatorFloorView : UIView {
   }()
   
   lazy var thirdFloorIcon: UIImageView = {
-    var view: UIImageView = UIImageView()
+    var view: UIImageView = UIImageView(frame: iconRect)
+    view.contentMode = UIViewContentMode.ScaleAspectFit
     let image: UIImage? = UIImage(named: "floor_3")
     image?.tint(color: UIColor.redColor())
     view.image = image
@@ -108,7 +116,8 @@ public class ElevatorFloorView : UIView {
   }()
   
   lazy var fourthFloorIcon: UIImageView = {
-    var view: UIImageView = UIImageView()
+    var view: UIImageView = UIImageView(frame: iconRect)
+    view.contentMode = UIViewContentMode.ScaleAspectFit
     let image: UIImage? = UIImage(named: "floor_4")
     image?.tint(color: UIColor.redColor())
     view.image = image
@@ -116,7 +125,8 @@ public class ElevatorFloorView : UIView {
   }()
   
   lazy var fifthFloorIcon: UIImageView = {
-    var view: UIImageView = UIImageView()
+    var view: UIImageView = UIImageView(frame: iconRect)
+    view.contentMode = UIViewContentMode.ScaleAspectFit
     let image: UIImage? = UIImage(named: "floor_5")
     image?.tint(color: UIColor.redColor())
     view.image = image
