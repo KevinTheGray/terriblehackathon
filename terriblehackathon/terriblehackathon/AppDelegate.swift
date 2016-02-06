@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private let screen: UIScreen = UIScreen.mainScreen()
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    rootViewController = ViewController()
+    rootViewController = DerpViewController()
     
     // configure the main window
     window = UIWindow(frame: screen.bounds)
