@@ -99,8 +99,9 @@ public class ElevatorFloorView : UIView {
     let image: UIImage? = UIImage(named: "floor_1")
     let imageHighlighted: UIImage? = UIImage(named: "floor_1")?.tint(color: highlightedColor)
     view.setImage(image: image!, forState: .Normal)
-    view.setImage(image: imageHighlighted!, forState: .Highlighted)
-    view.setImage(image: imageHighlighted!, forState: .Selected)
+    view.setBackgroundColor(color: UIColor.yellowColor(), forState: .Selected)
+    view.setBackgroundColor(color: UIColor.yellowColor(), forState: .Highlighted)
+    view.cornerRadius = 25.0
     view.addTarget(self, action: "pressedButton:", forControlEvents: .TouchUpInside)
     view.tag = 0
     view.selected = true
@@ -113,8 +114,9 @@ public class ElevatorFloorView : UIView {
     let image: UIImage? = UIImage(named: "floor_2")
     let imageHighlighted: UIImage? = UIImage(named: "floor_2")?.tint(color: highlightedColor)
     view.setImage(image: image!, forState: .Normal)
-    view.setImage(image: imageHighlighted!, forState: .Highlighted)
-    view.setImage(image: imageHighlighted!, forState: .Selected)
+    view.setBackgroundColor(color: UIColor.yellowColor(), forState: .Selected)
+    view.setBackgroundColor(color: UIColor.yellowColor(), forState: .Highlighted)
+    view.cornerRadius = 25.0
     view.addTarget(self, action: "pressedButton:", forControlEvents: .TouchUpInside)
     view.tag = 1
     return view
@@ -126,8 +128,9 @@ public class ElevatorFloorView : UIView {
     let image: UIImage? = UIImage(named: "floor_3")
     let imageHighlighted: UIImage? = UIImage(named: "floor_3")?.tint(color: highlightedColor)
     view.setImage(image: image!, forState: .Normal)
-    view.setImage(image: imageHighlighted!, forState: .Highlighted)
-    view.setImage(image: imageHighlighted!, forState: .Selected)
+    view.setBackgroundColor(color: UIColor.yellowColor(), forState: .Selected)
+    view.setBackgroundColor(color: UIColor.yellowColor(), forState: .Highlighted)
+    view.cornerRadius = 25.0
     view.addTarget(self, action: "pressedButton:", forControlEvents: .TouchUpInside)
     view.tag = 2
     return view
@@ -139,9 +142,10 @@ public class ElevatorFloorView : UIView {
     let image: UIImage? = UIImage(named: "floor_4")
     let imageHighlighted: UIImage? = UIImage(named: "floor_4")?.tint(color: highlightedColor)
     view.setImage(image: image!, forState: .Normal)
-    view.setImage(image: imageHighlighted!, forState: .Highlighted)
-    view.setImage(image: imageHighlighted!, forState: .Selected)
+    view.setBackgroundColor(color: UIColor.yellowColor(), forState: .Selected)
+    view.setBackgroundColor(color: UIColor.yellowColor(), forState: .Highlighted)
     view.addTarget(self, action: "pressedButton:", forControlEvents: .TouchUpInside)
+    view.cornerRadius = 25.0
     view.tag = 3
     return view
   }()
@@ -152,9 +156,10 @@ public class ElevatorFloorView : UIView {
     let image: UIImage? = UIImage(named: "floor_5")
     let imageHighlighted: UIImage? = UIImage(named: "floor_5")?.tint(color: highlightedColor)
     view.setImage(image: image!, forState: .Normal)
-    view.setImage(image: imageHighlighted!, forState: .Highlighted)
-    view.setImage(image: imageHighlighted!, forState: .Selected)
+    view.setBackgroundColor(color: UIColor.yellowColor(), forState: .Selected)
+    view.setBackgroundColor(color: UIColor.yellowColor(), forState: .Highlighted)
     view.addTarget(self, action: "pressedButton:", forControlEvents: .TouchUpInside)
+    view.cornerRadius = 25.0
     view.tag = 4
     return view
   }()
