@@ -69,14 +69,24 @@ public class RandomEncounter {
     return dialogOptions
   }
   
+  public func firstDialogForFartEvent() -> String {
+    return "\(self.encounterNPC) audibly farts. It wasn't cute."
+  }
+  
   public func dialogOptionsForFartEvent() -> EncounterDialogChoices {
     switch self.encounterStage {
-    case .InitialInteraction: return EncounterDialogChoices(awkwardChoice: "Hey, that's a nice fragrance", angryChoice: "I wish I did that first",
-      neutralChoice: "I dont feel very strongly about this", otherChoice: "*Stare Silently as the smell wafts")
-    case .ResponseInteraction: return EncounterDialogChoices(awkwardChoice: "Maybe you didn't hear me. I said it was a nice fragrance", angryChoice: "You couldn't have held it in?",
-      neutralChoice: "*Stare*", otherChoice: "*Excuse me, I need to make a call*")
-    case .ResolutionInteration: return EncounterDialogChoices(awkwardChoice: "Hope to see you soon", angryChoice: "Jerk",
-      neutralChoice: "Hmm... look at the time", otherChoice: "*Sit down*")
+    case .InitialInteraction:
+      let returnType = EncounterDialogChoices(awkwardChoice: "Hey, that's a nice fragrance", angryChoice: "I wish I did that first",
+        neutralChoice: "I dont feel very strongly about this", otherChoice: "*Stare Silently as the smell wafts")
+      return returnType
+    case .ResponseInteraction:
+      let returnType = EncounterDialogChoices(awkwardChoice: "Maybe you didn't hear me. I said it was a nice fragrance", angryChoice: "You couldn't have held it in?",
+        neutralChoice: "*Stare*", otherChoice: "*Excuse me, I need to make a call*")
+      return returnType
+    case .ResolutionInteration:
+      let returnType = EncounterDialogChoices(awkwardChoice: "Hope to see you soon", angryChoice: "Jerk",
+        neutralChoice: "Hmm... look at the time", otherChoice: "*Sit down*")
+      return returnType
     }
   }
   

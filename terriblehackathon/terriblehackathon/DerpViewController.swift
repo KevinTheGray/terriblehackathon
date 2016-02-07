@@ -131,6 +131,8 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
     let response: String = self.randomEncounter.encounterNPC.npcDialogResponseForType(choice!)
     self.addText(text: response, textAddedBy: textEntryStruct.NOT_USER)
     
+    self.randomEncounter.updateEncounterStage()
+    
     let options: EncounterDialogChoices = self.randomEncounter.dialogOptionsForFartEvent()
     self.buttonEntryView.setButtonTitles(encounterDialogChoices: options)
 //    self.view.bringSubviewToFront(self.elevatorDoorsView)
@@ -199,6 +201,7 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
       let name: String = self.randomEncounter.encounterNPC.npcName
       self.addText(text: "\(name) entered the elevator.", textAddedBy: textEntryStruct.STORY)
       self.buttonEntryView.setButtonTitles(encounterDialogChoices: options)
+      self.addText(text: self.randomEncounter.firstDialogForFartEvent(), textAddedBy: textEntryStruct.STORY)
     } else {
       self.addText(text: "You passed floor \(self.currentFloor).", textAddedBy: textEntryStruct.STORY)
     }
