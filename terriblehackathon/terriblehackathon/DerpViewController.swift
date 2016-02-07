@@ -49,6 +49,8 @@ public class DerpViewController : UIViewController, UITextViewDelegate, ButtonEn
     self.view.addSubview(self.buttonEntryView)
     self.view.addSubview(self.elevatorFloorView)
     //self.view.addSubview(self.elevatorDoorsView)
+    ElevatorMusicPlayer.player.loadElevatorMusic()
+    ElevatorMusicPlayer.player.playElevatorMusic()
     self.addText(text: "You are in an elevator, you are on the first floor.", textAddedBy: textEntryStruct.STORY)
   }
   
